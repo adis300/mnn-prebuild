@@ -20,16 +20,16 @@ MNN_VERSION=$(git rev-parse --short HEAD)
 echo_y "copy header and libraries to release folder"
 cd ${ROOT_DIR}
 echo $MNN_VERSION > release/MNN_VERSION
-cp -r MNN/include/MNN/*   release/include
+cp -r MNN/include/*   release/include
 cd release
 zip -r -X include.zip include
 rm -rf include
 cd ${ROOT_DIR}
 
 if [ "$os" == "Darwin" ]; then
-    cp -v mac/shared/libMNN.dylib     release/libMNN-osx-x86_64.dylib
-    cp -v mac/shared/libMNN_Express.dylib     release/libMNN_Express-osx-x86_64.dylib
-    cp -v mac/static/libMNN.a     release/libMNN-osx-x86_64.a
+    cp -v mac/dist/libMNN.dylib     release/libMNN-mac-x86_64.dylib
+    cp -v mac/dist/mnn.metallib     release/mnn-mac-x86_64.metallib
+    cp -v mac/dist/libMNN.a     release/libMNN-mac-x86_64.a
     #cp -v ios/dist/*                            release/
     #cp -v android/dist/*                        release/
 

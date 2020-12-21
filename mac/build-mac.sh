@@ -10,8 +10,8 @@ function echo_y () {
 }
 
 # remove
-rm -rf include shared static
-mkdir include shared static 
+rm -rf dist
+mkdir -p dist/include
 
 root=$(pwd)/..
 cd $root
@@ -20,17 +20,19 @@ rm -rf build
 
 echo_y "\nBuild shared and static library"
 ./schema/generate.sh
-mkdir build && cd build && cmake .. -DMNN_METAL=OFF && make -j4 #-DMNN_OPENCL=ON
-cmake .. -DMNN_METAL=OFF -DMNN_BUILD_SHARED_LIBS=OFF && make -j4
+mkdir build && cd build && cmake .. -DMNN_METAL=ON -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 && make -j4 #-DMNN_OPENCL=ON
+cmake .. -DMNN_METAL=ON -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON && make -j4
 
 echo_y "copy header and static library"
 cd $root
-cp -r MNN/include/MNN/*   mac/include
-cp MNN/build/libMNN.a mac/static
-# cp MNN/build/mnn.metallib mac/static
+cp -r MNN/include/MNN/*   mac/dist/include
+cp MNN/build/mnn.metallib mac/dist
+
+cp MNN/build/libMNN.a mac/dist
 
 echo_y "copy shared library"
-cp MNN/build/libMNN.dylib mac/shared
+cp MNN/build/libMNN.dylib mac/dist
+
 # cp MNN/build/source/backend/opencl/libMNN_CL.dylib mac/shared
-cp MNN/build/express/libMNN_Express.dylib mac/shared
+# cp MNN/build/express/libMNN_Express.dylib mac/shared
 
