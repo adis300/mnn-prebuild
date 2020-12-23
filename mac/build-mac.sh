@@ -11,7 +11,7 @@ function echo_y () {
 
 # remove
 rm -rf dist
-mkdir -p dist/include
+mkdir dist
 
 root=$(pwd)/..
 cd $root
@@ -27,7 +27,7 @@ cmake .. -DMNN_METAL=ON -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON && m
 
 echo_y "copy header and static library"
 cd $root
-cp -r MNN/include/MNN/*   mac/dist/include
+cp -r MNN/include   mac/dist/
 cp MNN/build/mnn.metallib mac/dist
 
 cp MNN/build/libMNN.a mac/dist
