@@ -23,6 +23,8 @@ echo_y "\nBuild shared and static library"
 mkdir build && cd build && cmake .. -DMNN_METAL=ON -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 && make -j4 #-DMNN_OPENCL=ON
 cmake .. -DMNN_METAL=ON -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON && make -j4
 
+# option(MNN_ARM82 "Enable ARM82" ON)
+
 echo_y "copy header and static library"
 cd $root
 cp -r MNN/include/MNN/*   mac/dist/include
