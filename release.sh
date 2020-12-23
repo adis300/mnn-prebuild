@@ -10,7 +10,7 @@ function echo_r() { echo -e "\033[0;31m$@\033[0m" ; }   # red
 
 # create release folder
 rm -rf release
-mkdir release
+mkdir -p release/include/MNN
 
 # mnn version
 cd ${ROOT_DIR}/MNN
@@ -20,7 +20,7 @@ MNN_VERSION=$(git rev-parse --short HEAD)
 echo_y "copy header and libraries to release folder"
 cd ${ROOT_DIR}
 echo $MNN_VERSION > release/MNN_VERSION
-cp -rf ios/dist/include   release
+cp -rf ios/dist/include/*   release/include/MNN
 
 cd release
 zip -r -X include.zip include
