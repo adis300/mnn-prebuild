@@ -28,14 +28,25 @@ rm -rf include
 cd ${ROOT_DIR}
 
 if [ "$os" == "Darwin" ]; then
+    echo_y "Releasing: mac libraries"
     cp -v mac/dist/libMNN.dylib     release/libMNN-mac-x86_64.dylib
     cp -v mac/dist/libMNN.a     release/libMNN-mac-x86_64.a
     cp -v mac/dist/mnn.metallib     release/mnn-mac.metallib
-
+    
+    echo_y "Releasing: iOS libraries"
     cp -v ios/dist/libMNN-iphoneos.a  release/
     cp -v ios/dist/libMNN-iphonesimulator.a  release/
     cp -v ios/dist/mnn.metallib release/mnn-ios.metallib
-    #cp -v android/dist/*                        release/
+    
+    echo_y "Releasing: Android libraries"
+    ARCHS="armeabi-v7a arm64-v8a x86_64"
+    for ARCH in ${ARCHS}
+    do
+    cp -v android/dist/libMNN-${ARCH}.a     release/libMNN-android-${ARCH}.a
+    cp -v android/dist/libMNN-${ARCH}.so    release/libMNN-android-${ARCH}.so
+    cp -v android/dist/libMNN_Vulkan-${ARCH}.a     release/libMNN_Vulkan-android-${ARCH}.a
+    cp -v android/dist/libMNN_Vulkan-${ARCH}.so    release/libMNN_Vulkan-android-${ARCH}.so
+    done
 elif [ "$os" == "Linux" ]; then
     echo "Write linux"
     #cp -v linux/dist/shared/libmxnet_predict.so  release/libmxnet_predict-linux-x86_64.so
