@@ -7,3 +7,13 @@ cmake . -DMNN_BUILD_TRAIN=ON -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_TRAIN_MINI=O
 
 cd build && make -j4
 ```
+
+# Build for windows
+```
+install choco at `https://chocolatey.org/install`
+choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System'
+choco install ninja -y
+
+In powershell with admin access
+Set-ExecutionPolicy unrestricted
+```
