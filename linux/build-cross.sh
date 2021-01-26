@@ -17,7 +17,7 @@ fi
 ARCH=$1
 
 # remove
-rm -rf dist
+rm -rf dist/$ARCH
 mkdir -p dist/$ARCH
 
 root=$(pwd)/..
@@ -50,7 +50,7 @@ make -j4
 
 echo_y "Copy header and static library"
 cd $root
-cp -r MNN/include   linux/dist/$ARCH
+cp -r MNN/include   linux/dist
 
 cp MNN/build/libMNN.a linux/dist/$ARCH
 

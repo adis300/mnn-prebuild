@@ -19,3 +19,6 @@ sudo apt-get install ant libprotobuf-dev libvulkan-dev libglew-dev freeglut3-dev
 ./build-cross.sh aarch64 $HOME/work/linaro/gcc-linaro-7.5.0-2019.12-x86_64_aarch64-linux-gnu
 
 ```
+
+# Installing OpenCL
+https://github.com/intel/compute-runtime/blob/master/opencl/doc/DISTRIBUTIONS.md
