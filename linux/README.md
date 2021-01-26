@@ -7,7 +7,11 @@ https://releases.linaro.org/components/toolchain/binaries/latest-7/armv8l-linux-
 * 64bit ArmV8
 https://releases.linaro.org/components/toolchain/binaries/latest-7/aarch64-linux-gnu/
 
-
+# Install pre-requisites
+```
+(Optional)
+sudo apt-get install ant libprotobuf-dev libvulkan-dev libglew-dev freeglut3-dev protobuf-compiler ocl-icd-opencl-dev libglfw3-devD
+```
 # Sample build command
 ```
 ./build-x86_64.sh
