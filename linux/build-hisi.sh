@@ -10,11 +10,11 @@ function echo_y () {
 
 if [ $# -ne 2 ]
 then
-    echo "USAGE: ./build-cross.sh [architecuture(arm/aarch64)] [PATH to gcc=linaro toolchain]"
+    echo "USAGE: ./build-hisi.sh [PATH to gcc=hisi toolchain]"
     exit
 fi
 
-ARCH=$1
+ARCH=hisi
 
 # remove
 rm -rf dist/$ARCH
@@ -27,13 +27,8 @@ rm -rf build
 echo_y "\nBuild linux static library"
 export cross_compile_toolchain=$2
 
-if [ $ARCH = 'arm' ]; then
-	GCC_PREFIX=arm-linux-gnueabihf
-elif [ $ARCH = 'aarch64' ]; then
-    GCC_PREFIX=aarch64-linux-gnu
-else
-    echo "ERROR: Unsupported arch:${ARCH}"
-fi
+GCC_PREFIX=arm-hisiv500-linux
+
 
 ./schema/generate.sh
 mkdir build && cd build
@@ -42,9 +37,10 @@ cmake .. \
     -DCMAKE_SYSTEM_NAME=Linux \
     -DCMAKE_SYSTEM_VERSION=1 \
     -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 \
-    -DCMAKE_SYSTEM_PROCESSOR=$ARCH \
+    -DCMAKE_SYSTEM_PROCESSOR=armv7-a \
     -DCMAKE_C_COMPILER=$cross_compile_toolchain/bin/${GCC_PREFIX}-gcc \
-    -DCMAKE_CXX_COMPILER=$cross_compile_toolchain/bin/${GCC_PREFIX}-g++
+    -DCMAKE_CXX_COMPILER=$cross_compile_toolchain/bin/${GCC_PREFIX}-g++ \
+    -mcpu=cortex-a7 -mfloat-abi=softfp -mfpu=neon-vfpv4
 
 make -j4
 
