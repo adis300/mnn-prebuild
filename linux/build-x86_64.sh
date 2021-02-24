@@ -27,6 +27,7 @@ cmake .. -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_B
 make -j4
 echo_y "Copy static library"
 cp $root/MNN/build/libMNN.a $root/linux/dist/$ARCH
+cp $root/MNN/build/MNNConvert $root/linux/dist/$ARCH
 
 echo_y "Build linux x86 shared library"
 #cmake .. -DMNN_BUILD_SHARED_LIBS=ON -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 -DMNN_OPENCL=ON
