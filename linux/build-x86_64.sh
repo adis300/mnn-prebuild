@@ -23,16 +23,16 @@ echo_y "Generating project"
 mkdir build && cd build
 
 echo_y "Build linux x86 static library"
-cmake .. -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON -DMNN_OPENCL=ON
+cmake .. -DMNN_BUILD_CONVERTER=true -DMNN_BUILD_SHARED_LIBS=OFF -DMNN_PORTABLE_BUILD=ON -DMNN_OPENCL=ON -DMNN_VULKAN=ON -DMNN_USE_SYSTEM_LIB=ON
 make -j4
 echo_y "Copy static library"
 cp $root/MNN/build/libMNN.a $root/linux/dist/$ARCH
 
 echo_y "Build linux x86 shared library"
-cmake .. -DMNN_BUILD_SHARED_LIBS=ON -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 -DMNN_OPENCL=ON
-make -j4
-echo_y "Copy shared library"
-cp $root/MNN/build/libMNN.so $root/linux/dist/$ARCH
+#cmake .. -DMNN_BUILD_SHARED_LIBS=ON -DMNN_PORTABLE_BUILD=ON -DMNN_SEP_BUILD=0 -DMNN_OPENCL=ON
+#make -j4
+#echo_y "Copy shared library"
+#cp $root/MNN/build/libMNN.so $root/linux/dist/$ARCH
 
 echo_y "Copy header library"
 cd $root
